@@ -16,26 +16,29 @@
  * @return {number[][]}
  */
 var merge = function(intervals) {
+    if (intervals.length <= 0) {
+        return intervals;
+    }
     let sortedIntervals = [...intervals];
     sortedIntervals.sort((interval1, interval2) => {
-        return interval1[0] - interval2[0];
+        return interval1[0] - interval2[0]; // sort with the left bound
     })
     console.log('sorted: ' + sortedIntervals);
     let mergedIntervals = [];
-    let start = 0, end = 0;
+    let start = 0, end = 0; // two pointer
 
     for(let i = 0; i < sortedIntervals.length - 1; i++) {
-        if (sortedIntervals[end][1] >= sortedIntervals[i+1][0]) {
-            if (sortedIntervals[i+1][1] > sortedIntervals[end][1]) {
+        if (sortedIntervals[end][1] >= sortedIntervals[i+1][0]) { // If bound are intersected, or if max bound can bleed and merge
+            if (sortedIntervals[i+1][1] > sortedIntervals[end][1]) { // If max bound need to be updated to the right bound
                 end = i + 1;
             }
         } else {
-            mergedIntervals.push([sortedIntervals[start][0], sortedIntervals[end][1]])
-            start = i+1;
+            mergedIntervals.push([sortedIntervals[start][0], sortedIntervals[end][1]]) // store the privious interval
+            start = i+1; // update bound
             end = i+1;
         }
     }
-    mergedIntervals.push([sortedIntervals[start][0], sortedIntervals[end][1]])
+    mergedIntervals.push([sortedIntervals[start][0], sortedIntervals[end][1]]) // store the last interval
     return mergedIntervals;
 };
 

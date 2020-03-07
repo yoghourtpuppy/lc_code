@@ -1,0 +1,24 @@
+
+<!-- edit your html here -->
+<label for="item_search">Search for item: </label>
+<input type="search" name="item_search" onChange>
+
+<script>
+// Edit your script here
+const input = document.querySelector('input');
+const updateValue = (event) => {
+	console.log(event.target.value);
+}
+
+const debounce = (func, limit) => {
+	let timer;
+    let context = this;
+	return (...params) => {
+		clearTimeout(timer);
+		timer = setTimeout(()=>{
+				func.apply(context, params);
+			}, limit);
+	}
+}
+input.addEventListener('input', debounce(updateValue, 200));
+</script>

@@ -1,0 +1,36 @@
+{
+  "photoCollection": {
+    "user": {
+      "userId": "13113",
+      "userName":"sfsfsf",
+      "password": "asd"
+    },
+    "photos": [{
+      "id": 1,
+        "venueId": 1,
+        "author": "a"
+      },
+      {
+        "id": 2,
+        "venueId": 2,
+        "author": "b"
+      }
+    ],
+    "venues": [{
+        "venueId": 1,
+        "name": "fsf",
+        "address": "fsf"
+      },
+      {
+        "venueId": 2,
+        "name": "sfs",
+        "address": "sfsf"
+      }
+    ]
+  }
+}
+
+GET user/:userId/photos
+GET user/:userId/venues
+GET user/:userId/photos?venue=1
+GET venues/:venueId/photos/:photoId

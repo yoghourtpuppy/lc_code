@@ -3,7 +3,7 @@
 // Example 1:
 
 // Input: "abcabcbb"
-// Output: 3 
+// Output: 3
 // Explanation: The answer is "abc", with the length of 3.
 /**
  * @param {string} s
@@ -18,6 +18,7 @@ var lengthOfLongestSubstring = function(s) {
     while (r < s.length) {
       if (map.has(s.charAt(r))) {
         l = map.get(s.charAt(r)) + 1;
+        l
         r = l;
         map.clear();
       } else {
@@ -31,4 +32,21 @@ var lengthOfLongestSubstring = function(s) {
 
 var s = 'avaf';
 var res = lengthOfLongestSubstring(s);
-console.log(res.toString());
+console.log(res);
+
+var lengthOfLongestSubstring1 = function(s) {
+  let set = new Set();
+  let longest = 0;
+  let current = 0;
+  for(let i = 0; i < s.length; i++) {
+      set.clear();
+      current = 0;
+      for(let j = i; j < s.length && !set.has(s[j]); j++) {
+          current++;
+          longest = longest > current ? longest: current;
+          set.add(s[i]);
+      }
+
+  }
+  return longest;
+};

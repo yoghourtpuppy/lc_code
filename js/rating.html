@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
   <body>
     <div class="stars-outer">
       <div class="stars-inner"></div>
@@ -14,7 +14,7 @@
     .stars-outer::before {
       content: "\f006 \f006 \f006 \f006 \f006";
     }
-     
+
     .stars-inner {
       position: absolute;
       top: 0;
@@ -42,4 +42,52 @@
   }
   </script>
 
-</html>
+</html> -->
+
+<div class="ratingContainer">
+  <div class="rating">
+    <div data-rating="5" class="star"></div>
+    <div data-rating="4" class="star"></div>
+    <div data-rating="3" class="star"></div>
+    <div data-rating="2" class="star"></div>
+    <div data-rating="1" class="star"></div>
+  </div>
+  <div class="ratingResult"></div>
+</div>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+
+.ratingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.star {
+  width: 50px;
+  height: 50px;
+  border: 1px gold solid;
+  border-radius: 50%;
+  margin: 4px;
+}
+
+.star:hover,
+.star:hover ~ .star {
+  background-color: gold;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: gold;
+}
+
+</style>

@@ -4,7 +4,6 @@ function getValue(obj, path) {
   }
 
   const strArr = path.split('.');
-  strArr
   function helper(result) {
     if(strArr.length === 0) return result;
 
@@ -30,7 +29,7 @@ function getValue(obj, path) {
   return helper(obj);
 }
 
-const obj = { 'x': [{ 'y': { 'z': 100 } }] };
+const obj = { 'x': [{ 'y': { 'z': [100] } }] };
 
-const value = getValue(obj, 'x[0]'); // 100
+const value = getValue(obj, 'x[0].y.z[0]'); // 100
 console.log(value);

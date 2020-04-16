@@ -1,41 +1,42 @@
 const filter = (n) => n >= 0;
 
 const filterObject = (filter, object) => {
-  const filteredObj = {};
-  for(let key in object) {
-    const value = object[key];
-    key
-    value
-    filteredObj
-    if(typeof value === 'object') {
-      let filteredValue = filterObject(filter, value);
-      if(Object.keys(filteredValue).length > 0) {
-        filteredObj[key] = filteredValue;
+  if(Array.isArray(object)) {
+    return object.map((item)=> {
+      return filterObject(filter, item);
+    }).filter((item)=>{
+      return item && !(typeof item === 'object' && Object.keys(item).length === 0);
+    });
+  } else if(object !== null && typeof object === 'object') {
+    return Object.keys(object).reduce((acc, key)=> {
+      const filteredVal = filterObject(filter, object[key]);
+      if(filteredVal && !(typeof filteredVal === 'object' && Object.keys(filteredVal).length === 0)) {
+        acc[key] = filteredVal;
       }
-    } else if(filter(value)) {
-      filteredObj[key] = value;
-    }
-    filteredObj
-
+      return acc;
+    }, {});
+  } else if (filter(object)) {
+    return object;
   }
-  return filteredObj;
+  return;
 }
 
 const object1 = {
   a: 1,
   b: {
     c: 2,
-    e: {
-      h: 3,
-      f: {
+    e: [
+      {
+        f: {
         g: -4,
-      },
+      }
     }
+    ]
   }
 };
 
 const res1 = filterObject(filter, object1);
-
+res1
 const filterObject1 = (filter, object) => {
   const processObject = (filter, object) => {
     for(let key in object) {
